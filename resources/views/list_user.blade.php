@@ -2,46 +2,68 @@
 
 @section('content')
 
-    <h1>Daftar Pengguna</h1>
+<div class="user-page">
 
-    <table>
+    <div class="user-heading">
+        <div>
+            <h1>Daftar Pengguna</h1>
+            <p>Kelola data pengguna yang tersimpan dalam sistem.</p>
+        </div>
 
-        <thead>
+        <a href="/user/create" class="btn-add-user">
+            + Tambah User
+        </a>
+    </div>
 
-            <tr>
+    <x-user-table :users="$users" />
 
-                <th>ID</th>
+</div>
 
-                <th>Nama</th>
+<style>
+    .user-page {
+        background-color: #FFF8F9;
+        padding: 55px 70px;
+    }
 
-                <th>NPM</th>
+    .user-heading {
+        max-width: 1100px;
+        margin: 0 auto 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 
-                <th>Kelas</th>
+    .user-heading h1 {
+        color: #9F5662;
+        font-size: 30px;
+        font-weight: 700;
+        margin-bottom: 8px;
+    }
 
-            </tr>
+    .user-heading p {
+        color: #888;
+        margin: 0;
+        font-size: 14px;
+    }
 
-        </thead>
+    .btn-add-user {
+        background: linear-gradient(
+            90deg,
+            #B76E79,
+            #D49A9F
+        );
+        color: white;
+        padding: 11px 20px;
+        border-radius: 25px;
+        text-decoration: none;
+        font-size: 13px;
+        transition: 0.2s;
+    }
 
-        <tbody>
-
-            @foreach ($users as $user)
-
-                <tr>
-
-                    <td>{{ $user->id }}</td>
-
-                    <td>{{ $user->nama }}</td>
-
-                    <td>{{ $user->nim }}</td>
-
-                    <td>{{ $user->nama_kelas }}</td>
-
-                </tr>
-
-            @endforeach
-
-        </tbody>
-
-    </table>
+    .btn-add-user:hover {
+        color: white;
+        opacity: 0.9;
+    }
+</style>
 
 @endsection
