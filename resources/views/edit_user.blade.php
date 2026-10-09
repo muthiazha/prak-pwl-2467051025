@@ -3,35 +3,39 @@
 @section('content')
 
 <div>
-    <h1>Buat Pengguna Baru</h1>
+    <h1>Edit Pengguna</h1>
+
     @if ($errors->any())
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <ul class="mb-0">
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <ul class="mb-0">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
     @endif
 
-    <form action="{{ route('user.store') }}" method="POST"> 
+    <form action="{{ route('user.update', $user->id) }}" method="POST">
         @csrf
+        @method('PUT')
 
         <label for="nama">Nama:</label><br>
-        <input type="text" id="nama" name="nama"><br><br>
+        <input type="text" id="nama" name="nama" value="{{ old('nama', $user->nama) }}"><br><br>
 
         <label for="npm">NPM:</label><br>
-        <input type="text" id="npm" name="npm"><br><br>
+        <input type="text" id="npm" name="npm" value="{{ old('npm', $user->npm) }}"><br><br>
 
-        <label for="kelas">Kelas:</label><br>
-        <select name="kelas_id" id="kelas_id"> 
+        <label for="kelas_id">Kelas:</label><br>
+        <select name="kelas_id" id="kelas_id">
             @foreach ($kelas as $kelasItem)
-                <option value="{{ $kelasItem->id }}">{{ $kelasItem->nama_kelas }}</option>
+                <option value="{{ $kelasItem->id }}" {{ $user->kelas_id == $kelasItem->id ? 'selected' : '' }}>
+                    {{ $kelasItem->nama_kelas }}
+                </option>
             @endforeach
         </select><br><br>
 
-        <button type="submit">Submit</button>
+        <button type="submit">Update</button>
     </form>
 </div>
 
@@ -89,11 +93,7 @@
     main form button {
         width: 100%;
         border: none;
-        background: linear-gradient(
-            90deg,
-            #B76E79,
-            #D49A9F
-        );
+        background: linear-gradient(90deg, #B76E79, #D49A9F);
         color: white;
         padding: 11px;
         border-radius: 8px;

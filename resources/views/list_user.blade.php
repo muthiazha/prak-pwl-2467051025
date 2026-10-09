@@ -14,6 +14,13 @@
             + Tambah User
         </a>
     </div>
+    
+    @if (session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert" style="max-width: 1100px; margin: 0 auto 20px;">
+    {{ session('success') }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+@endif
 
     <x-user-table :users="$users" />
 

@@ -14,6 +14,7 @@
                     <th>Nama</th>
                     <th>NPM</th>
                     <th>Kelas</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
 
@@ -27,6 +28,14 @@
                             <span class="kelas-badge">
                                 {{ $user->nama_kelas }}
                             </span>
+                        </td>
+                        <td>
+                            <a href="{{ route('user.edit', $user->id) }}" class="btn-edit">Edit</a>
+                            <form action="{{ route('user.destroy', $user->id) }}" method="POST" style="display: inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn-hapus" onclick="return confirm('Yakin ingin menghapus data ini?')">Hapus</button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach
@@ -91,5 +100,33 @@
         border-radius: 15px;
         font-size: 12px;
         font-weight: 600;
+    }
+
+    .btn-edit,
+    .btn-hapus {
+        display: inline-block;
+        padding: 5px 14px;
+        border-radius: 15px;
+        font-size: 12px;
+        font-weight: 600;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    .btn-edit {
+        background-color: #FEE1E3;
+        color: #D26777;
+    }
+
+    .btn-hapus {
+        background-color: #D26777;
+        color: white;
+    }
+
+    .btn-edit:hover,
+    .btn-hapus:hover {
+        opacity: 0.85;
     }
 </style>
